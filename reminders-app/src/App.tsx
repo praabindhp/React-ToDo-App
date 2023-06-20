@@ -25,7 +25,7 @@ function App() {
   };
 
   const addReminder = async (title: string) => {
-    const newReminder = await reminderService.addReminder(title);
+    const newReminder: Reminder = await reminderService.addReminder(title);
     setReminders([newReminder, ...reminders]);
   }
 
