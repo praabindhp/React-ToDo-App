@@ -19,21 +19,21 @@ function App() {
     setReminders(reminders);
   };
 
+  const removeReminder = async (id: number) => {
+    await reminderService.removeReminder(id);
+    setReminders(reminders.filter((reminder) => reminder.id !== id));
+  };
+
   const addReminder = async (title: string) => {
     const newReminder = await reminderService.addReminder(title);
     setReminders([newReminder, ...reminders]);
-    // console.log(title);
   }
 
   return (
-    (<div className="App">
-      <NewReminder onAddReminder={addReminder}/>
-      <><ReminderList items={reminders} onRemoveReminder={(id: number) => {
-    setReminders(reminders.filter((reminder: { id: number; }) => {
-      return reminder.id !== id;
-    }));
-  }}/></>
-    </div>)
+ <div className="App">
+  <NewReminder onAddReminder={addReminder} />
+  <ReminderList items = {reminders} onRemoveReminder={removeReminder} />
+ </div>
   );
 }
 

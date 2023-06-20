@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface NewReminderProps {
     onAddReminder: (title: string) => void;
 };
 
 function NewReminder({ onAddReminder }: NewReminderProps): JSX.Element {
-  const [title, setTitle] = React.useState<string>("");
+  const [title, setTitle] = useState('');
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!title) return;
     onAddReminder(title);
+    setTitle('');
     // console.log(title);
   };
 
